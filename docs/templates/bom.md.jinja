@@ -1,0 +1,9 @@
+### 3rd Party Licenses
+
+| Name  | Version | License(s) | Type |
+| ----- | ------- | ---------- | ---- |
+| [Task](https://taskfile.dev/#/)     | v3      | MIT        | tool |
+| [grype](https://github.com/anchore/grype) | 0.13    | Apache 2.0 | tool |
+| [syft](https://github.com/anchore/syft)  | 0.19    | Apache 2.0 | tool |
+{% for package in packages %}| [{{ package.name }}]({{ package.url }}) | {{ package.version }} | {{ package.licenses }} | {{ package.kind }} |
+{% endfor %}

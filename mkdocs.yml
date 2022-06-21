@@ -1,0 +1,89 @@
+site_name: Python Package
+theme:
+  name: "material"
+  # Disable fonts because of GDPR (https://squidfunk.github.io/mkdocs-material/setup/changing-the-fonts/#disabling-font-loading)
+  font: false
+  palette:
+    - scheme: default
+      primary: cyan
+      accent: amber
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+    - scheme: slate
+      primary: cyan
+      accent: amber
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+  favicon: images/favicon-png.png
+  icon:
+    repo: fontawesome/brands/github
+  logo: images/bosch-logo.png
+
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - rust
+    - python
+    - java
+#  features:
+#    - navigation.tabs
+
+repo_url: https://github.com/Git-foramit/Python-package
+repo_name: Python-package
+site_author: Amit Joshi
+edit_uri: edit/master/docs/
+
+docs_dir: docs
+site_dir: site
+
+nav:
+    - Home: README.md
+    - Pre Requisites: prerequisites.md
+    - Getting Started: gettingstarted.md
+    - Development environment: running.md
+    - Architectural Concepts: architecture.md
+    - Documentation: documentation.md
+    - Tests: tests.md
+    - Release Notes: releases.md
+    - Changelog: CHANGELOG.md
+    - License: LICENSE.md
+
+use_directory_urls: false
+
+plugins:
+  - search
+  - mkdocstrings:
+        handlers:
+            python:
+                setup_commands:
+                    - import sys
+                    - sys.path.append("docs")
+                selection:
+                    new_path_syntax: yes
+
+  - git-revision-date-localized:
+        fallback_to_build_date: true
+  - mkapi
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.emoji
+  - codehilite
+  - smarty
+  - toc:
+      permalink: true
+
+extra_css:
+    - 'css/termynal.css'
+
+extra_javascript:
+    - 'js/termynal.js'
+    - 'js/custom.js'
+
+extra:
+  version:
+    provider: mike
