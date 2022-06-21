@@ -17,19 +17,23 @@ jobs:
               run: |
                   git config --global user.email "notesforamit@gmail.com"
                   git config --global user.name "Amit Joshi"
-            - name: Set up Python runtime 🐍
+            - name: Set up Python 3.8
               uses: actions/setup-python@v1
               with:
-                  python-version: "3.8"
-            - name: Install pipenv 🐍
-              run: |
-                  python -m pip install --upgrade pipenv wheel
-            - name: Install Task 🗳️
-              uses: arduino/setup-task@v1
-            - name: Setup env pipenv 🐍
-              run: |
-                  rm Pipfile*
-                  pipenv install mkdocs-material mkdocstrings mkdocs-git-revision-date-localized-plugin mike cyclonedx-bom mdbom pip-licenses mkapi
+                python-version: 3.8
+            - name: Install pypa/build
+              run: >-
+                python -m
+                pip install
+                build
+                --user
+            - name: Build a binary wheel and a source tarball
+              run: >-
+                python -m
+                build
+                --sdist
+                --wheel
+                --outdir dist/
             - name: Generate BOM Reports 📝
               run: |
                   task scan-report-json TAG=latest
