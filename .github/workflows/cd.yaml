@@ -3,7 +3,7 @@ name: cd
 on:
   push:
     branches: ['releases-*' ]
-  
+
 jobs:
   build-n-publish:
     runs-on: ubuntu-18.04
@@ -13,33 +13,25 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
+
       - name: Set up Git
         run: |
           git config --global user.email "notesforamit@gmail.com"
           git config --global user.name "Amit Joshi"    
-          
-      - name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
-        runs-on: ubuntu-18.04
-        steps:
-        - uses: actions/checkout@master
-        - name: Set up Python 3.6
-          uses: actions/setup-python@v1
+
+      - name: Set up Python runtime
+          - uses: actions/setup-python@v2.2.1
           with:
             python-version: 3.6
-        - name: Install pypa/build
+        - name: Install pipenv
           run: >-
-            python -m
-            pip install
-            build
-            --user
-        - name: Build a binary wheel and a source tarball
-          run: >-
-            python -m
-            build
-            --sdist
-            --wheel
-            --outdir dist/
+            python -m pip install --upgrade pipenv wheel
+        - name: Setup env pipenv
+          run: |
+            pipenv install
+        - name: Build dist
+          run: |
+            make build-dist
         - name: Publish distribution 📦 to Test PyPI
           uses: pypa/gh-action-pypi-publish@master
           with:
