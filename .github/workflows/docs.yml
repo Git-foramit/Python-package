@@ -34,10 +34,14 @@ jobs:
                 --sdist
                 --wheel
                 --outdir dist/
+            - name: Install mkdocs material
+              run: >-
+                pip install
+                mkdocs-material mkdocstrings mkdocs-git-revision-date-localized-plugin mike cyclonedx-bom mdbom pip-licenses mkapi
             - name: Generate BOM Reports 📝
               run: |
-                  task scan-report-json TAG=latest
-                  task bom-report-json TAG=latest
+                make bom
+                make bom-report-md
             - name: Deploy docs 📦️
               env:
                   GH_TOKEN: ${{ secrets.GH_Token }}
