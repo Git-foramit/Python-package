@@ -6,6 +6,7 @@ on:
   
 jobs:
   build-n-publish:
+    runs-on: ubuntu-18.04
     name: Build and deploying docs
     steps:
       - name: Checkout repository
