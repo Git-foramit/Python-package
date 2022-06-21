@@ -37,7 +37,9 @@ jobs:
             - name: Install mkdocs material
               run: >-
                 pip install
-                mkdocs-material mkdocstrings mkdocs-git-revision-date-localized-plugin mike cyclonedx-bom mdbom pip-licenses mkapi
+                mkdocs-material 
+                mkdocstrings mkdocs-git-revision-date-localized-plugin
+                mike cyclonedx-bom mdbom pip-licenses mkapi
             - name: Generate BOM Reports 📝
               run: |
                 make bom
