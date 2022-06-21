@@ -6,6 +6,18 @@ on:
   
 jobs:
   build-n-publish:
+    name: Build and deploying docs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Set up Git
+        run: |
+          git config --global user.email "notesforamit@gmail.com"
+          git config --global user.name "Amit Joshi"
+    
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     runs-on: ubuntu-18.04
     steps:
